@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Hawk — Building the Future of Service Operations</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080808;
+  --surface:#0f0f0f;
+  --border:rgba(255,255,255,0.07);
+  --border-md:rgba(255,255,255,0.12);
+  --tp:#f0f0f0;
+  --ts:#a8a8a8;
+  --tt:#686868;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tp);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+
+
+/* Hide all broken image artifacts */
+img { color: transparent; }
+img::before { display: none; }
+
+/* DOT GRID */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.055) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none;z-index:0
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 52px;
+  border-bottom:0.5px solid var(--border);
+  background:rgba(8,8,8,0.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  z-index:200
+}
+.nav-left{display:flex;align-items:center;gap:12px}
+.nav-logo-img{height:48px;width:auto;mix-blend-mode:screen;opacity:0.95}
+.nav-word{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;
+  letter-spacing:0.15em;color:var(--tp)
+}
+.nav-sep{width:0.5px;height:18px;background:var(--border-md);margin:0 4px}
+.nav-tag{
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--ts)
+}
+.nav-right{display:flex;align-items:center;gap:36px}
+.nav-link{
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--ts);
+  text-decoration:none;transition:color .2s
+}
+.nav-link:hover{color:var(--tp)}
+.nav-btn{
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--tp);border:0.5px solid var(--border-md);
+  padding:8px 20px;text-decoration:none;
+  transition:background .2s,border-color .2s
+}
+.nav-btn:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.25)}
+
+/* HERO */
+#hero{
+  min-height:100vh;display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:112px 52px 80px;
+  position:relative;z-index:1;gap:40px
+}
+.hero-left{display:flex;flex-direction:column;justify-content:center}
+.hero-status{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.35em;text-transform:uppercase;color:var(--tt);
+  margin-bottom:48px
+}
+.status-dot{
+  width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.3);
+  animation:pulse 2.5s ease-in-out infinite
+}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+.hero-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;
+  letter-spacing:0.4em;text-transform:uppercase;color:var(--tt);
+  margin-bottom:20px
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,9vw,128px);
+  line-height:.88;color:var(--tp);
+  letter-spacing:0.02em;margin-bottom:32px
+}
+.hero-tagline{
+  font-family:'Barlow Condensed',sans-serif;font-size:clamp(16px,1.8vw,22px);
+  font-weight:300;color:var(--ts);letter-spacing:0.12em;
+  text-transform:uppercase;margin-bottom:20px;
+  border-left:1px solid var(--border-md);padding-left:16px
+}
+.hero-desc{
+  font-size:15px;font-weight:300;color:var(--ts);
+  line-height:1.75;max-width:440px;margin-bottom:48px
+}
+.hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn-primary{
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:#080808;background:#f0f0f0;
+  padding:14px 32px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-block;
+  transition:background .2s
+}
+.btn-primary:hover{background:#cecece}
+.btn-ghost{
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--ts);text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:color .2s
+}
+.btn-ghost:hover{color:var(--tp)}
+
+/* HERO RIGHT — large logo mark */
+.hero-right{
+  display:flex;align-items:center;justify-content:center;
+  position:relative
+}
+.hero-logo-wrap{position:relative}
+.hero-logo-bg{
+  position:absolute;inset:-60px;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,0.025) 0%,transparent 70%);
+  pointer-events:none
+}
+.hero-logo-img{
+  width:min(520px,48vw);height:auto;
+  mix-blend-mode:screen;
+  opacity:0.85;
+  display:block
+}
+
+/* STATS */
+.stats-row{
+  display:flex;gap:48px;
+  padding-top:48px;margin-top:48px;
+  border-top:0.5px solid var(--border);
+}
+.stat-item{}
+.stat-val{
+  font-family:'Bebas Neue',sans-serif;font-size:36px;
+  color:var(--tp);letter-spacing:0.05em;line-height:1
+}
+.stat-lbl{
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--tt);
+  margin-top:4px
+}
+
+/* SECTION COMMON */
+.section-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.45em;text-transform:uppercase;color:var(--tt);
+  margin-bottom:16px
+}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,7vw,96px);
+  line-height:.88;color:var(--tp);
+  letter-spacing:0.02em
+}
+
+/* FEATURES */
+#features{
+  padding:120px 52px;
+  position:relative;z-index:1;
+  border-top:0.5px solid var(--border)
+}
+.features-header{margin-bottom:72px}
+.features-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:0;border:0.5px solid var(--border)
+}
+.feat{
+  padding:52px 48px;
+  border:0.5px solid var(--border);
+  position:relative;
+  transition:background .3s
+}
+.feat:hover{background:rgba(255,255,255,0.02)}
+/* corner accent top-left */
+.feat::before{
+  content:'';position:absolute;top:0;left:0;
+  width:24px;height:24px;
+  border-top:1px solid rgba(255,255,255,0.18);
+  border-left:1px solid rgba(255,255,255,0.18)
+}
+.feat-num{
+  font-family:'Bebas Neue',sans-serif;font-size:11px;
+  letter-spacing:0.45em;color:var(--tt);
+  margin-bottom:36px;display:block
+}
+.feat-title{
+  font-family:'Bebas Neue',sans-serif;font-size:40px;
+  letter-spacing:0.03em;color:var(--tp);
+  line-height:.95;margin-bottom:20px
+}
+.feat-desc{
+  font-size:14px;font-weight:300;color:var(--ts);
+  line-height:1.75;max-width:380px
+}
+
+/* CONTACT */
+#contact{
+  padding:120px 52px;
+  border-top:0.5px solid var(--border);
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:start
+}
+.contact-left{}
+.contact-desc{
+  font-size:15px;font-weight:300;color:var(--ts);
+  line-height:1.75;max-width:400px;margin-top:24px
+}
+.contact-right{padding-top:60px}
+.contact-entry{
+  display:flex;flex-direction:column;gap:6px;
+  padding:32px 0;border-bottom:0.5px solid var(--border);
+}
+.contact-entry:first-child{border-top:0.5px solid var(--border)}
+.c-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.4em;text-transform:uppercase;color:var(--tt)
+}
+.c-val{
+  font-family:'Barlow Condensed',sans-serif;font-size:22px;
+  letter-spacing:0.05em;color:var(--ts);
+  text-decoration:none;
+  transition:color .2s
+}
+.c-val:hover{color:var(--tp)}
+
+/* FOOTER */
+footer{
+  padding:28px 52px;
+  border-top:0.5px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;z-index:1
+}
+.footer-left{display:flex;align-items:center;gap:10px}
+.footer-logo{height:20px;mix-blend-mode:screen;opacity:0.5}
+.footer-word{
+  font-family:'Bebas Neue',sans-serif;font-size:15px;
+  letter-spacing:0.15em;color:var(--tt)
+}
+.footer-copy{
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--tt)
+}
+
+/* SCROLL FADE */
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .9s ease,transform .9s ease
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <img class="nav-logo-img" src="th-small.png" alt="TH" style="display:none" onload="this.style.display='block';document.getElementById('nav-th-text').style.display='none'" onerror="this.style.display='none'"><span id="nav-th-text" style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#f0f0f0;letter-spacing:0.05em;line-height:1;">TH</span>
+    <div class="nav-sep"></div>
+    <span class="nav-word">TASK HAWK</span>
+    <div class="nav-sep"></div>
+    <span class="nav-tag">Automotive SaaS</span>
+  </div>
+  <div class="nav-right">
+    <a href="#features" class="nav-link">Capabilities</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#contact" class="nav-btn">Request Access →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-status">
+      <div class="status-dot"></div>
+      Platform in Development &nbsp;·&nbsp; Est. 2026
+    </div>
+
+    <p class="hero-eyebrow">Automotive Service Technology</p>
+
+    <h1 class="hero-title">TASK<br>HAWK</h1>
+
+    <p class="hero-tagline">Building the Future of Service Operations</p>
+
+    <p class="hero-desc">
+      A SaaS platform engineered to modernize automotive service centers — eliminating inefficiency, digitizing repair orders, and giving operators real-time visibility into every job on the floor.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request Early Access</a>
+      <a href="#features" class="btn-ghost">View Capabilities →</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-val">$10B+</div>
+        <div class="stat-lbl">Total Addressable Market</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">25%+</div>
+        <div class="stat-lbl">Admin Overhead Reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">30+</div>
+        <div class="stat-lbl">Prototype Iterations</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-logo-wrap">
+      <div class="hero-logo-bg"></div>
+      <img class="hero-logo-img" src="th-logo.png" alt="" style="display:none" onload="this.style.display='block'" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="features-header">
+    <p class="section-eyebrow reveal">Platform Capabilities</p>
+    <h2 class="section-title reveal reveal-delay-1">BUILT FOR<br>PERFORMANCE</h2>
+  </div>
+
+  <div class="features-grid">
+    <div class="feat reveal">
+      <span class="feat-num">01 / CORE</span>
+      <h3 class="feat-title">Repair Order Management</h3>
+      <p class="feat-desc">Digital repair orders that eliminate paper, reduce error rates, and create a centralized record of every service transaction across your shop floor.</p>
+    </div>
+    <div class="feat reveal reveal-delay-1">
+      <span class="feat-num">02 / VISIBILITY</span>
+      <h3 class="feat-title">Service Tracking</h3>
+      <p class="feat-desc">Real-time visibility into every vehicle — from intake to delivery. Know exactly where each job stands, which bay it's in, and when it's ready.</p>
+    </div>
+    <div class="feat reveal reveal-delay-2">
+      <span class="feat-num">03 / INTELLIGENCE</span>
+      <h3 class="feat-title">Workflow Automation</h3>
+      <p class="feat-desc">Intelligent task routing assigns the right technician to the right job automatically — cutting wait times and maximizing floor throughput.</p>
+    </div>
+    <div class="feat reveal reveal-delay-3">
+      <span class="feat-num">04 / INSIGHT</span>
+      <h3 class="feat-title">Analytics</h3>
+      <p class="feat-desc">Data-driven intelligence on shop performance, technician efficiency, and revenue metrics — giving operators the visibility to make smarter decisions, faster.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <p class="section-eyebrow reveal">Connect</p>
+    <h2 class="section-title reveal reveal-delay-1">GET IN<br>TOUCH</h2>
+    <p class="contact-desc reveal reveal-delay-2">
+      Interested in early access, a partnership, or just want to discuss the platform? Reach out directly — always open to the right conversation.
+    </p>
+  </div>
+  <div class="contact-right reveal reveal-delay-1">
+    <div class="contact-entry">
+      <span class="c-label">Email</span>
+      <a href="mailto:dylanjennings06@gmail.com" class="c-val">dylanjennings06@gmail.com</a>
+    </div>
+    <div class="contact-entry">
+      <span class="c-label">LinkedIn</span>
+      <a href="https://www.linkedin.com/in/dylan-m-jennings" target="_blank" class="c-val">linkedin.com/in/dylan-m-jennings</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img class="footer-logo" src="th-small.png" alt="" style="display:none" onload="this.style.display='block'" onerror="this.style.display='none'">
+    <span class="footer-word">TASK HAWK</span>
+  </div>
+  <p class="footer-copy">© 2026 Task Hawk · All Rights Reserved</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
