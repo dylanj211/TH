@@ -1,4 +1,4 @@
-# TH[index.html](https://github.com/user-attachments/files/28531207/index.html)
+[index (2).html](https://github.com/user-attachments/files/28531299/index.2.html)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +14,8 @@
   --border:rgba(255,255,255,0.07);
   --border-md:rgba(255,255,255,0.12);
   --tp:#f0f0f0;
-  --ts:#5a5a5a;
-  --tt:#2a2a2a;
+  --ts:#a8a8a8;
+  --tt:#686868;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--tp);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
